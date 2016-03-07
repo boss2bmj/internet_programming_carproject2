@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car_license: MyString
+  description: MyText
+  enter_date: 2016-03-07
+  car_category: MyString
+  car_subcategory: MyString
+
+two:
+  car_license: MyString
+  description: MyText
+  enter_date: 2016-03-07
+  car_category: MyString
+  car_subcategory: MyString
