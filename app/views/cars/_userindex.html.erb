@@ -1,0 +1,42 @@
+<h1>Hello</h1>
+<p>/car/_userindex</p>
+<a href="/">Home</a>
+<a href= "<%=user_session_path%>" >Sign In</a>
+
+
+<table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th>Car license</th>
+      <th>Description</th>
+      <th>Enter date</th>
+      <th>Car category</th>
+      <th>Car subcategory</th>
+      <th></th>
+      <!-- <th colspan="3"></th> -->
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th>Car license</th>
+      <th>Description</th>
+      <th>Enter date</th>
+      <th>Car category</th>
+      <th>Car subcategory</th>
+      <th></th>
+    </tr>
+  </tfoot>
+
+  <tbody>
+    <% @cars.each do |car| %>
+      <tr>
+        <td><%= car.car_license %></td>
+        <td><%= car.description %></td>
+        <td><%= car.enter_date.to_formatted_s(:long_ordinal) %></td>
+        <td><%= car.car_category %></td>
+        <td><%= car.car_subcategory %></td>
+        <td><%= link_to 'Show', car %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
