@@ -76,3 +76,6 @@ end
 
 
 
+
+http://localhost:3000/admins/sign_up
+
