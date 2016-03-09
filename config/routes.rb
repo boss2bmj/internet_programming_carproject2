@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :car_images
   devise_for :users
 
 

@@ -201,27 +201,28 @@ you can check route by type ```$ rake routes``` in your terminal.
 gem "paperclip", "~> 4.3"
 
 ```bash
-$ rails g scaffold CarPhoto image_name:string
+$ rails g scaffold CarImage image_name:string
 ```
 
 
 ```rb
-class CarPhoto < ActiveRecord::Base
-  belongs_to :car_detail
+class CarImage < ActiveRecord::Base
+  belongs_to :car_status
   has_attached_file :image, styles: { superlarge: "1200x560>",large: "700x700>", medium: "300x300>", thumb: "100x100#" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 end
 
 ```
 
->app/models/car_photo.rb
+>app/models/car_image.rb
 
 
 ```bash
-$ rails g paperclip CarPhoto image
+$ rails g paperclip CarImage image
+$ rake db:migrate
 ```
 
-to make photo pop up when choose
+To choose a image and make an image pop up when you choose, you need to add this form:
 
 ```html
 <img id="output"/>
@@ -234,7 +235,14 @@ to make photo pop up when choose
     output.src = URL.createObjectURL(event.target.files[0]);
   };
 </script>
+```
+>app/views/car_images/_form.html.erb
 
+Also you need to add ```:image``` in car image params:
 
+```rb
+def car_image_params
+      params.require(:car_image).permit(:image_name, :image)
+    end
 ```
 
