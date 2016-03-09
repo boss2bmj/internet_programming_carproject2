@@ -25,4 +25,46 @@
   <%= @car.car_subcategory %>
 </p>
 
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Status</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Car Status</h4>
+      </div>
+      <div class="modal-body">
+        <!--original-->
+        <div class="">
+          <h1><%= @car.car_license %></h1>
+          <%if @car_statuses.blank? %>
+            <h3>No Status Here Yet, Please contact us for more information</h3>
+          <%else%>
+            <% i = 1 %>
+            <% @car_statuses.each do |car_status| %>
+              <div class="car_statuss">
+                <%= i %>
+                <%= car_status.description %>
+                <%= car_status.status %>
+                <%= i = i+1 %>
+              </div>
+
+          <%end %>
+          <%end %>
+
+        </div>
+        <!--original-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%= link_to 'Back', cars_path %>

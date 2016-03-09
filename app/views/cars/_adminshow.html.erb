@@ -25,5 +25,27 @@
   <%= @car.car_subcategory %>
 </p>
 
+<div class="">
+  <h1>Car Status</h1>
+  <%if @car_statuses.blank? %>
+    <h3>No Car Status Yet, Would yo like to add it first?</h3>
+    <%= link_to 'Add Photo', new_car_car_status_path(@car), class: "btn btn-danger" %>
+  <%else%>
+    <% i = 1 %>
+    <% @car_statuses.each do |car_status| %>
+      <div class="car_statuss">
+        <%= i %>
+        <%= car_status.description %>
+        <%= car_status.status %>
+        <%= link_to 'Edit Photo', edit_car_car_status_path(@car, car_status), class: "btn btn-danger" %>
+        <%= link_to 'Destroy', car_car_status_path(@car, car_status), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% i = i+1 %>
+      </div>
+
+  <%end %>
+  <%end %>
+
+</div>
+
 <%= link_to 'Edit', edit_car_path(@car) %> |
 <%= link_to 'Back', cars_path %>

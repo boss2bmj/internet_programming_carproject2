@@ -7,15 +7,6 @@ To create new project run this command:
 $ rails new internet_programming_carproject2
 $ cd internet_programming_carproject2
 ```
-##Add Car MVC
-```
-$ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string 
-$ rails g scaffold CarStatus description:text status:boolean
-$ rake db:migrate
-```
->make sure that you not forget to run rake db:migrate
-
-
 
 ##Devise gem
 
@@ -52,6 +43,17 @@ class ApplicationController < ActionController::Base
 end
 ```
 
+##Add Car MVC
+```
+$ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string 
+$ rails g scaffold CarStatus description:text status:boolean
+$ rake db:migrate
+```
+>make sure that you not forget to run rake db:migrate
+
+
+
+
 ##Search function
 
 
@@ -74,6 +76,118 @@ end
 ```
 
 
+##Setting Models
+
+To begin with ```user.rb```
+
+```rb
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  has_many :cars
+end
+```
+>I set that user has many cars
+
+Next, ```car.rb```
+
+```rb
+class Car < ActiveRecord::Base
+  validates :car_license, presence: true
+  belongs_to :user
+  has_many :car_statuses, dependent: :destroy
+end
+```
+
+The reason that i set **dependent: :destroy** because if i delete car the car_staus will be deleted.
+>car belong to user, and also car has many car status
+
+
+last, ```car_status.rb```
+
+```rb
+class CarStatus < ActiveRecord::Base
+  belongs_to :car
+end
+```
+>car status belong to car
+
+
+##Connect Table between Car and CarStatus
+
+
+
+```bash
+$ rails g migration add_car_id_to_car_statuses car_id:integer
+$ rake db:migrate
+```
+
+First you have to change form_for in the form file:
+
+```ruby
+<%= form_for [@car,@car_status], html: { multipart: true } do |f| %>
+```
+>app/views/car_photos/_form.html.erb
+
+Newt to make it nested loop:
+```rb
+resources :car_statuses, except:[:show, :index]
+```
+
+become like
+
+```rb
+resources :cars do
+    resources :car_statuses, except:[:show, :index]
+  end
+```
+>routes.rb
+
+
+
+Then i go to add before_action, modify create, and add set_car
+
+```rb
+before_action :set_car
+def create
+    @car_status = CarStatus.new(car_status_params)
+    @car_status.car_id = @car.id
+    if @car_status.save
+        redirect_to @car
+      else
+        render 'new'
+
+      end
+    end
+
+# in private
+def set_car
+      @car = Car.find(params[:car_id])
+
+    end
+```
+>app/controllers/car_statuses_controller.rb
+
+
+
+To make the status show, i need to add ```@car_statuses = CarStatus.all```  ```@car_statuses = CarStatus.where(car_id: @car.id)``` 
+in index, and also in show. 
+
+```rb
+def index
+    @cars = Car.all
+    @car_statuses = CarStatus.all
+  end
+
+  def show
+    @car_statuses = CarStatus.where(car_id: @car.id)
+  end
+```
+>app/controllers/cars_controller.rb
+
+**Do not forget to change the path, if not it will error!!**
 
 
 

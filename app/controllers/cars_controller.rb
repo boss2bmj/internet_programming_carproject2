@@ -5,11 +5,13 @@ class CarsController < ApplicationController
   # GET /cars.json
   def index
     @cars = Car.all
+    @car_statuses = CarStatus.all
   end
 
   # GET /cars/1
   # GET /cars/1.json
   def show
+    @car_statuses = CarStatus.where(car_id: @car.id)
   end
 
   # GET /cars/new
