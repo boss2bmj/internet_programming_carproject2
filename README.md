@@ -246,3 +246,36 @@ def car_image_params
     end
 ```
 
+
+
+##share image to each car
+
+
+
+```bash
+$ rails g migration add_car_id_to_car_photos car_id:integer
+$ rake db:migrate
+```
+
+
+
+```ruby
+<%= form_for [@car_detail,@car_photo], html: { multipart: true } do |f| %>
+```
+>app/views/car_photos/_form.html.erb
+
+
+```rb
+resources :car_photos, except:[:show, :index]
+```
+
+become like
+
+```rb
+resources :car_details do
+    resources :car_photos, except:[:show, :index]
+  end
+```
+>routes.rb
+
+
