@@ -32,7 +32,6 @@
     <%= link_to 'Add Photo', new_car_car_status_path(@car), class: "btn btn-danger" %>
   <%else%>
     <% i = 1 %>
-    <% @car_statuses.each do |car_status| %>
     <div class="table-responsive">
       <table class="table">
         <th>List</th>
@@ -42,6 +41,8 @@
         <th></th>
         <th></th>
         <th></th>
+    <% @car_statuses.each do |car_status| %>
+
 
 
       <div class="car_statuss">
