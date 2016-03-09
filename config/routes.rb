@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :car_statuses
   devise_for :users
 
 

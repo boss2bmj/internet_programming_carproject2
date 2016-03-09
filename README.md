@@ -10,6 +10,7 @@ $ cd internet_programming_carproject2
 ##Add Car MVC
 ```
 $ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string 
+$ rails g scaffold CarStatus description:text status:boolean
 $ rake db:migrate
 ```
 >make sure that you not forget to run rake db:migrate
@@ -20,7 +21,7 @@ $ rake db:migrate
 
 [Devise gem](https://github.com/plataformatec/devise)
 
-First putdevise in gemfile
+First put devise in gemfile
 
 ```ruby
 gem 'devise'
@@ -48,7 +49,6 @@ After that i authenticate user and admin like example below:
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_admin!, only:[:new,:create, :edit, :update, :destroy]
-  before_action :authenticate_user!, only:[:show]
 end
 ```
 
