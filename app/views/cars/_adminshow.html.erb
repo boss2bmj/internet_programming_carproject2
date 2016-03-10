@@ -29,7 +29,7 @@
   <h1>Car Status</h1>
   <%if @car_statuses.blank? %>
     <h3>No Car Status Yet, Would yo like to add it first?</h3>
-    <%= link_to 'Add Photo', new_car_car_status_path(@car), class: "btn btn-danger" %>
+    <%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-danger" %>
   <%else%>
     <% i = 1 %>
     <div class="table-responsive">
@@ -38,7 +38,6 @@
         <th>Order</th>
         <th>Status</th>
         <th>Image</th>
-        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -52,9 +51,8 @@
           <td><%= car_status.description %></td>
           <td><%= car_status.status %></td>
           <td>Image</td>
-          <td><a href="#">Add Image</a></td>
-          <td><%= link_to 'Show', car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
-          <td><%= link_to 'Edit Photo', edit_car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
+          <td><%= link_to 'Add Image', car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
+          <td><%= link_to 'Edit Status', edit_car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
           <td><%= link_to 'Destroy', car_car_status_path(@car, car_status), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
 
@@ -68,6 +66,7 @@
     </table>
   </div>
 </div>
-
+<br><br>
+<%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-danger" %>
 <%= link_to 'Edit', edit_car_path(@car) %> |
 <%= link_to 'Back', cars_path %>

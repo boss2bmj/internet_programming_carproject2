@@ -6,4 +6,4 @@ rails g scaffold CarImage image_name:string
 
 rails g paperclip CarImage image
 
-rails g migration add_car_status_id_to_car_images car_id:integer
+rails g migration add_car_status_id_to_car_images car_status_id:integer

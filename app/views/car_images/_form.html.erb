@@ -1,4 +1,4 @@
-<%= form_for @car_image, html: { multipart: true } do |f| %>
+<%= form_for [@car,@car_status,@car_image], html: { multipart: true } do |f| %>
   <% if @car_image.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@car_image.errors.count, "error") %> prohibited this car_image from being saved:</h2>

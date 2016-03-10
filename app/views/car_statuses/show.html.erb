@@ -12,5 +12,28 @@
 
 
 
+<div class="">
+  <h1>Photo</h1>
+  <%if @car_images.blank? %>
+    <h3>No Photo Yet, Would yo like to add it first?</h3>
+    <%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status), class: "btn btn-danger" %>
+  <%else%>
+    <% @car_images.each do |car_image| %>
+      <div class="car_images">
+        <%= car_image.image_name %>
+        <%= image_tag car_image.image.url(:medium) %>
+        <%= link_to 'Edit Photo', edit_car_car_status_car_image_path(@car,@car_status, car_image), class: "btn btn-danger" %>
+        <%= link_to 'Destroy', car_car_status_car_image_path(@car,@car_status, car_image), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+      </div>
+
+  <%end %>
+  <%end %>
+
+</div>
+<%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status) %>
+
+
+
 <%= link_to 'Edit Status', edit_car_car_status_path, class: "btn btn-danger" %>
 <%= link_to 'Back', car_path(@car)  %>

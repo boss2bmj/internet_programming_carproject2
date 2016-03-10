@@ -129,9 +129,10 @@ First you have to change form_for in the form file:
 ```ruby
 <%= form_for [@car,@car_status], html: { multipart: true } do |f| %>
 ```
->app/views/car_photos/_form.html.erb
+>app/views/car_status/_form.html.erb
 
 Newt to make it nested loop:
+
 ```rb
 resources :car_statuses, except:[:show, :index]
 ```
@@ -253,7 +254,7 @@ def car_image_params
 
 
 ```bash
-$ rails g migration add_car_id_to_car_photos car_id:integer
+$ rails g migration add_car_status_id_to_car_images car_status_id:integer
 $ rake db:migrate
 ```
 

@@ -1,6 +1,7 @@
 class CarImagesController < ApplicationController
   before_action :set_car_image, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_car_status
+  before_action :set_car
   # GET /car_images
   # GET /car_images.json
   def index
@@ -22,20 +23,23 @@ class CarImagesController < ApplicationController
   end
 
   # POST /car_images
+
+
+
+
+
   # POST /car_images.json
   def create
     @car_image = CarImage.new(car_image_params)
+    @car_image.car_status_id = @car_status.id
+    if @car_image.save
+        redirect_to car_car_status_path(@car_status,@car)
 
-    respond_to do |format|
-      if @car_image.save
-        format.html { redirect_to @car_image, notice: 'Car image was successfully created.' }
-        format.json { render :show, status: :created, location: @car_image }
       else
-        format.html { render :new }
-        format.json { render json: @car_image.errors, status: :unprocessable_entity }
+        render 'new'
+
       end
     end
-  end
 
   # PATCH/PUT /car_images/1
   # PATCH/PUT /car_images/1.json
@@ -65,6 +69,14 @@ class CarImagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_car_image
       @car_image = CarImage.find(params[:id])
+    end
+    def set_car_status
+      @car_status = CarStatus.find(params[:car_status_id])
+
+    end
+    def set_car
+      @car = Car.find(params[:car_id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

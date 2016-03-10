@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  resources :car_images
   devise_for :users
 
 
   devise_for :admins
 
   resources :cars do
-    resources :car_statuses, except:[ :index]
+    resources :car_statuses, except:[ :index] do
+      resources :car_images, except:[:show,:index]
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
