@@ -41,6 +41,7 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
     <% @car_statuses.each do |car_status| %>
 
 
@@ -52,6 +53,7 @@
           <td><%= car_status.status %></td>
           <td>Image</td>
           <td><a href="#">Add Image</a></td>
+          <td><%= link_to 'Show', car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
           <td><%= link_to 'Edit Photo', edit_car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
           <td><%= link_to 'Destroy', car_car_status_path(@car, car_status), method: :delete, data: { confirm: 'Are you sure?' } %></td>
 

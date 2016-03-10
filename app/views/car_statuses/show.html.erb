@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Description:</strong>
@@ -10,5 +9,8 @@
   <%= @car_status.status %>
 </p>
 
-<%= link_to 'Edit', edit_car_status_path(@car_status) %> |
-<%= link_to 'Back', car_statuses_path %>
+
+
+
+<%= link_to 'Edit Status', edit_car_car_status_path, class: "btn btn-danger" %>
+<%= link_to 'Back', car_path(@car)  %>
