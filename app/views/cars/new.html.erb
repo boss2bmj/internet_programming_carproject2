@@ -1,5 +1,12 @@
-<h1>New Car</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <h1>New Car</h1>
+  </div>
 
-<%= render 'form' %>
+  <br>
+  <div class="container">
+    <%= render 'form' %>
+  </div>
 
-<%= link_to 'Back', cars_path %>
+</div>
+<%= link_to 'Back', cars_path, class: "btn btn-primary" %>

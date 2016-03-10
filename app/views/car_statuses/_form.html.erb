@@ -11,15 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.check_box :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+
+
+
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2"><%= f.label :description %> :</label>
+    <div class="col-sm-7">
+      <%= f.text_area :description,class:"form-control", rows:"1" %>
+    </div>
+  </div><br><br>
+
+  <div class="form-group">
+    <label class="col-sm-2"><%= f.label :status %> :</label>
+    <div class="col-sm-9">
+      <%= f.check_box :status %>
+    </div>
+  </div><br><br>
+
+
+  <div class="actions btn">
+    <%= f.submit%>
+  </div><br><br>
+
+  </form>
+
+
 <% end %>

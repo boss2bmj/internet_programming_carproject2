@@ -11,21 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :image_name %><br>
-    <%= f.text_field :image_name %>
-  </div>
-  <img id="output"/>
 
-  <%= f.file_field :image, onchange: "loadFile(event)" , accept:"image/*"  %>
 
-  <script>
-    var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    };
-  </script>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <form class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-2"><%= f.label :image_name %> :</label>
+    <div class="col-sm-7">
+      <%= f.text_field :image_name,class:"form-control" %>
+    </div>
+  </div><br><br><br><br><br><br>
+
+  <div class="form-group">
+    <label class="col-sm-3"><%= f.file_field :image, onchange: "loadFile(event)" , accept:"image/*"  %></label>
+    <div class="col-sm-9">
+      <img id="output"/>
+    </div>
+  </div><br><br>
+
+
+  <div class="actions btn">
+    <%= f.submit%>
+  </div><br><br>
+
+  </form>
+
+
 <% end %>
+
+
+
+<script>
+  var loadFile = function(event) {
+  var output = document.getElementById('output');
+  output.src = URL.createObjectURL(event.target.files[0]);
+  };
+</script>

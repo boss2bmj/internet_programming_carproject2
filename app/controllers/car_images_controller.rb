@@ -46,7 +46,7 @@ class CarImagesController < ApplicationController
   def update
     respond_to do |format|
       if @car_image.update(car_image_params)
-        format.html { redirect_to @car_image, notice: 'Car image was successfully updated.' }
+        format.html { redirect_to car_car_status_path(@car,@car_status), notice: 'Car image was successfully updated.' }
         format.json { render :show, status: :ok, location: @car_image }
       else
         format.html { render :edit }

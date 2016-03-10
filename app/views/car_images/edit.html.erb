@@ -1,5 +1,12 @@
-<h1>Editing Car Image</h1>
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <h1>Editing Car Image</h1>
+  </div>
 
-<%= render 'form' %>
+  <br>
+  <div class="container">
+    <%= render 'form' %>
+  </div>
 
-<%= link_to 'Back', car_car_status_path(@car,@car_status) %>
+</div>
+<%= link_to 'Back', car_car_status_path(@car,@car_status), class: "btn btn-primary" %>

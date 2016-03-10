@@ -11,27 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :car_license %><br>
-    <%= f.text_field :car_license %>
+
+
+
+<form class="form-horizontal">
+<div class="form-group">
+  <label class="col-sm-2"><%= f.label :car_license%> :</label>
+  <div class="col-sm-9">
+    <%= f.text_field :car_license ,class:"form-control"%>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+</div><br><br><br>
+
+<div class="form-group">
+  <label class="col-sm-2"><%= f.label :description %> :</label>
+  <div class="col-sm-9">
+    <%= f.text_area :description,class:"form-control", rows:"1" %>
   </div>
-  <div class="field">
-    <%= f.label :enter_date %><br>
+</div><br><br>
+
+<div class="form-group">
+  <label class="col-sm-2"><%= f.label :car_category %> :</label>
+  <div class="col-sm-9">
+    <%= f.text_field :car_category,class:"form-control" %>
+  </div>
+</div><br><br>
+<div class="form-group">
+  <label class="col-sm-2"><%= f.label :car_subcategory %> :</label>
+  <div class="col-sm-9">
+    <%= f.text_field :car_subcategory,class:"form-control" %>
+  </div>
+</div><br><br>
+<div class="form-group">
+  <label class="col-sm-2"><%= f.label :enter_date %> :</label>
+  <div class="col-sm-9">
     <%= f.date_select :enter_date %>
   </div>
-  <div class="field">
-    <%= f.label :car_category %><br>
-    <%= f.text_field :car_category %>
-  </div>
-  <div class="field">
-    <%= f.label :car_subcategory %><br>
-    <%= f.text_field :car_subcategory %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div><br><br>
+
+<div class="actions btn">
+  <%= f.submit%>
+</div><br><br>
+
+</form>
+
+
+
 <% end %>

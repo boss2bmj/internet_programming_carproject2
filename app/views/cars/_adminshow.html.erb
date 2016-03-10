@@ -1,71 +1,75 @@
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <td><h4>Car Informations</h4></td>
+  </div>
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Car license</th>
+        <th class="text-center">Description</th>
+        <th class="text-center">Enter date</th>
+        <th class="text-center">Car category</th>
+        <th class="text-center">Car subcategory</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Car license:</strong>
-  <%= @car.car_license %>
-</p>
+    <tbody>
+      <tr>
+        <td><%= @car.car_license %></td>
+        <td><%= @car.description %></td>
+        <td><%= @car.enter_date %></td>
+        <td><%= @car.car_category %></td>
+        <td><%= @car.car_subcategory %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @car.description %>
-</p>
 
-<p>
-  <strong>Enter date:</strong>
-  <%= @car.enter_date %>
-</p>
 
-<p>
-  <strong>Car category:</strong>
-  <%= @car.car_category %>
-</p>
-
-<p>
-  <strong>Car subcategory:</strong>
-  <%= @car.car_subcategory %>
-</p>
-
-<div class="">
-  <h1>Car Status</h1>
+  <div class="panel panel-primary">
+    <div class="panel-heading panel-primary">
+      <td><h4>Car Status</h4></td>
+    </div>
   <%if @car_statuses.blank? %>
+  <div class="container">
     <h3>No Car Status Yet, Would yo like to add it first?</h3>
-    <%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-danger" %>
+    <%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-danger" %><br><br>
+  </div>
   <%else%>
     <% i = 1 %>
-    <div class="table-responsive">
-      <table class="table">
-        <th>List</th>
-        <th>Order</th>
-        <th>Status</th>
-        <th>Image</th>
-        <th></th>
-        <th></th>
-        <th></th>
-    <% @car_statuses.each do |car_status| %>
+      <table class="table table-bordered text-center">
+        <thead>
+          <th class="text-center">List</th>
+          <th class="text-center">Order</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Image</th>
+          <th colspan="3"></th>
+        </thead>
+        <tbody>
+          <% @car_statuses.each do |car_status| %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= car_status.description %></td>
+              <td><%= car_status.status %></td>
+              <td>Image</td>
+              <td><%= link_to 'Add Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
+              <td><%= link_to 'Edit Status', edit_car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
+              <td><%= link_to 'Destroy', car_car_status_path(@car, car_status), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
 
 
+            </tr>
 
-      <div class="car_statuss">
-        <tr>
-          <td><%= i %></td>
-          <td><%= car_status.description %></td>
-          <td><%= car_status.status %></td>
-          <td>Image</td>
-          <td><%= link_to 'Add Image', car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
-          <td><%= link_to 'Edit Status', edit_car_car_status_path(@car, car_status), class: "btn btn-danger" %></td>
-          <td><%= link_to 'Destroy', car_car_status_path(@car, car_status), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% i = i+1 %>
+        </tbody>
 
-
-        </tr>
-
-        <% i = i+1 %>
-      </div>
 
   <%end %>
   <%end %>
     </table>
-  </div>
+
 </div>
 <br><br>
-<%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-danger" %>
-<%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Back', cars_path %>
+<%= link_to 'Add Status', new_car_car_status_path(@car), class: "btn btn-primary" %>
+<%= link_to 'Edit', edit_car_path(@car), class: "btn btn-primary" %>
+<%= link_to 'Back', cars_path, class: "btn btn-primary" %>
