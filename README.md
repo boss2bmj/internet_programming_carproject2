@@ -261,22 +261,76 @@ $ rake db:migrate
 
 
 ```ruby
-<%= form_for [@car_detail,@car_photo], html: { multipart: true } do |f| %>
+<%= form_for [@car,@car_status,@car_image], html: { multipart: true } do |f| %>
 ```
->app/views/car_photos/_form.html.erb
+>app/views/car__images/ _form.html.erb
 
 
 ```rb
-resources :car_photos, except:[:show, :index]
+resources :car_images, except:[:show,:index]
 ```
 
 become like
 
 ```rb
-resources :car_details do
-    resources :car_photos, except:[:show, :index]
+resources :cars do
+    resources :car_statuses, except:[ :index] do
+      resources :car_images, except:[:show,:index]
+    end
   end
 ```
 >routes.rb
+
+
+
+Then i go to add before action, modify create, and add set_car
+
+```rb
+before_action :set_car_status
+before_action :set_car
+
+def create
+    @car_image = CarImage.new(car_image_params)
+    @car_image.car_status_id = @car_status.id
+    if @car_image.save
+        redirect_to car_car_status_path(@car_status,@car)
+
+      else
+        render 'new'
+
+      end
+    end
+# in private
+def set_car_status
+      @car_status = CarStatus.find(params[:car_status_id])
+
+    end
+def set_car
+      @car = Car.find(params[:car_id])
+
+    end
+```
+>app/controllers/car_images_controller.rb
+
+
+
+To make the status show, i need to add ```@car_images = CarImage.all```  ```@car_images = CarImage.where(car_status_id: @car_status.id)``` 
+in index, and also in show by order. 
+
+```rb
+def index
+    @cars = Car.all
+    @car_statuses = CarStatus.all
+  end
+
+  def show
+    @car_statuses = CarStatus.where(car_id: @car.id)
+  end
+```
+>app/controllers/car_statuses_controller.rb
+
+**Do not forget to change the path, if not it will error!!**
+
+you can check route by type ```$ rake routes``` in your terminal.
 
 
