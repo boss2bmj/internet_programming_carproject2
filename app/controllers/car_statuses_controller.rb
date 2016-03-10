@@ -30,7 +30,7 @@ class CarStatusesController < ApplicationController
     @car_status = CarStatus.new(car_status_params)
     @car_status.car_id = @car.id
     if @car_status.save
-        redirect_to @car
+        redirect_to @car, notice: 'Car was successfully created.'
       else
         render 'new'
 
