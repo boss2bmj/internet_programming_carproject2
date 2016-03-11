@@ -1,46 +1,83 @@
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <td><h4>Car Informations</h4></td>
+  </div>
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Car license</th>
+        <th class="text-center">Description</th>
+        <th class="text-center">Enter date</th>
+        <th class="text-center">Car category</th>
+        <th class="text-center">Car subcategory</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Car license:</strong>
-  <%= @car.car_license %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @car.description %>
-</p>
-
-<p>
-  <strong>Enter date:</strong>
-  <%= @car.enter_date %>
-</p>
-
-<p>
-  <strong>Car category:</strong>
-  <%= @car.car_category %>
-</p>
-
-<p>
-  <strong>Car subcategory:</strong>
-  <%= @car.car_subcategory %>
-</p>
+    <tbody>
+      <tr>
+        <td><%= @car.car_license %></td>
+        <td><%= @car.description %></td>
+        <td><%= @car.enter_date %></td>
+        <td><%= @car.car_category %></td>
+        <td><%= @car.car_subcategory %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <td><h4>Car Status</h4></td>
+  </div>
+<%if @car_statuses.blank? %>
+<div class="container">
+  <h3>No Car Status Yet, Please contact us for more information.</h3>
+</div>
+<%else%>
+  <% i = 1 %>
+    <table class="table table-bordered text-center">
+      <thead>
+        <th class="text-center">List</th>
+        <th class="text-center">Order</th>
+        <th class="text-center">Status</th>
+        <th class="text-center">Image</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% @car_statuses.each do |car_status| %>
+          <tr>
+            <td><%= i %></td>
+            <td><%= car_status.description %></td>
+            <td><%= car_status.status %></td>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Status</button>
 
-<!-- Modal -->
+            <td><%= link_to 'Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Image</button></td>
+
+          </tr>
+
+          <% i = i+1 %>
+      </tbody>
+
+
+<%end %>
+<%end %>
+  </table>
+
+</div>
+
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Car Status</h4>
+        <h4 class="modal-title" id="myModalLabel">Image</h4>
       </div>
       <div class="modal-body">
         <!--original-->
         <div class="">
-          <h1><%= @car.car_license %></h1>
           <%if @car_statuses.blank? %>
             <h3>No Status Here Yet, Please contact us for more information</h3>
           <%else%>
@@ -50,7 +87,7 @@
                 <%= i %>
                 <%= car_status.description %>
                 <%= car_status.status %>
-                <%= i = i+1 %>
+                <% i = i+1 %>
               </div>
 
           <%end %>
@@ -66,4 +103,4 @@
   </div>
 </div>
 
-<%= link_to 'Back', cars_path %>
+<%= link_to 'Back', cars_path, class: "btn btn-primary" %>

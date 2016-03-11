@@ -1,0 +1,65 @@
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <td><h4>Car Statuss</h4></td>
+  </div>
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Description</th>
+        <th class="text-center">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @car_status.description %></td>
+        <td><%= @car_status.status %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+  <div class="panel panel-primary">
+    <div class="panel-heading panel-primary">
+      <td><h4>Car Image</h4></td>
+    </div>
+  <%if @car_images.blank? %>
+    <div class="container">
+      <h3>No Image Here Yet, Please Contact us for mor information</h3>
+    </div>
+
+  <%else%>
+    <% i = 1 %>
+      <table class="table table-bordered text-center">
+        <thead>
+          <th class="text-center">List</th>
+          <th class="text-center">Image name</th>
+          <th class="text-center">Image</th>
+        </thead>
+        <tbody>
+          <% @car_images.each do |car_image| %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= car_image.image_name %></td>
+              <td><%= image_tag car_image.image.url(:thumb) %></td>
+
+
+            </tr>
+
+            <% i = i+1 %>
+        </tbody>
+
+
+  <%end %>
+  <%end %>
+    </table>
+
+</div>
+
+
+
+<%= link_to 'Back', car_path(@car), class: "btn btn-primary"  %>

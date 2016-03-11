@@ -1,0 +1,72 @@
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <td><h4>Car Statuss</h4></td>
+  </div>
+  <table class="table table-bordered text-center">
+    <thead>
+      <tr>
+        <th class="text-center">Description</th>
+        <th class="text-center">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @car_status.description %></td>
+        <td><%= @car_status.status %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+  <div class="panel panel-primary">
+    <div class="panel-heading panel-primary">
+      <td><h4>Car Image</h4></td>
+    </div>
+  <%if @car_images.blank? %>
+    <div class="container">
+      <h3>No Image Yet, Would yo like to add it first?</h3>
+      <%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status), class: "btn btn-danger" %><br><br>
+    </div>
+
+  <%else%>
+    <% i = 1 %>
+      <table class="table table-bordered text-center">
+        <thead>
+          <th class="text-center">List</th>
+          <th class="text-center">Image name</th>
+          <th class="text-center">Image</th>
+          <th colspan="2"></th>
+        </thead>
+        <tbody>
+          <% @car_images.each do |car_image| %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= car_image.image_name %></td>
+              <td><%= image_tag car_image.image.url(:thumb) %></td>
+              <td><%= link_to 'Edit Image', edit_car_car_status_car_image_path(@car,@car_status, car_image), class: "btn btn-primary" %></td>
+              <td><%= link_to 'Destroy', car_car_status_car_image_path(@car,@car_status, car_image), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+
+
+            </tr>
+
+            <% i = i+1 %>
+        </tbody>
+
+
+  <%end %>
+  <%end %>
+    </table>
+
+</div>
+
+<%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status), class: "btn btn-primary" %>
+
+
+
+<%= link_to 'Edit Status', edit_car_car_status_path, class: "btn btn-primary" %>
+<%= link_to 'Back', car_path(@car), class: "btn btn-primary"  %>
