@@ -42,7 +42,6 @@
         <th class="text-center">Order</th>
         <th class="text-center">Status</th>
         <th class="text-center">Image</th>
-        <th></th>
       </thead>
       <tbody>
         <% @car_statuses.each do |car_status| %>
@@ -53,7 +52,6 @@
 
 
             <td><%= link_to 'Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Image</button></td>
 
           </tr>
 
@@ -77,23 +75,6 @@
       </div>
       <div class="modal-body">
         <!--original-->
-        <div class="">
-          <%if @car_statuses.blank? %>
-            <h3>No Status Here Yet, Please contact us for more information</h3>
-          <%else%>
-            <% i = 1 %>
-            <% @car_statuses.each do |car_status| %>
-              <div class="car_statuss">
-                <%= i %>
-                <%= car_status.description %>
-                <%= car_status.status %>
-                <% i = i+1 %>
-              </div>
-
-          <%end %>
-          <%end %>
-
-        </div>
         <!--original-->
       </div>
       <div class="modal-footer">
@@ -102,5 +83,28 @@
     </div>
   </div>
 </div>
-
+<button type="button" id="carphoto" class="btn btn-primary" data-toggle="modal" data-target="#myModal">All Image</button>
 <%= link_to 'Back', cars_path, class: "btn btn-primary" %>
+
+
+
+  <% @car_statuses.each do |car_status| %>
+    <%if @car_statuses.blank? %>
+      <h3>No Status Here Yet, Please contact us for more information</h3>
+    <%else%>
+
+    <% @car_images.each do |car_image| %>
+      <script type="text/javascript">
+        console.log("car status = ",<%=car_status.id %>, "and car image = ", <%=car_image.car_status_id %> );
+        if (<%=car_status.id %> == <%=car_image.car_status_id %> )  {
+          $( ".modal-body" )
+            .append( "<%= car_image.image_name %> "  )
+            .append( "<img alt='Benz cls class' src='<%= car_image.image.url(:thumb) %>' > "  )
+          }
+</script>
+
+      </script>
+
+      <% end %>
+    <% end %>
+  <% end %>

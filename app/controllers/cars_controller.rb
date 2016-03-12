@@ -11,6 +11,8 @@ class CarsController < ApplicationController
   # GET /cars/1
   # GET /cars/1.json
   def show
+    @cars = Car.all
+    @car_images = CarImage.all
     @car_statuses = CarStatus.where(car_id: @car.id)
   end
 
