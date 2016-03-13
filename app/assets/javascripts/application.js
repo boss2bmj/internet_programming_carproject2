@@ -15,4 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
+
+var keep_num = 0;
+var keep_num_true = 0;
+var keep_num_false = 0;
 var check = 1;
