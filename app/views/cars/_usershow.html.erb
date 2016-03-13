@@ -1,6 +1,10 @@
+<h1>Information of <%= @car.car_license %></h1><br>
+
+
+
 <div class="panel panel-primary">
   <div class="panel-heading panel-primary">
-    <td><h4>Car Informations</h4></td>
+    <td><h4>Car Details</h4></td>
   </div>
   <table class="table table-bordered text-center">
     <thead>
@@ -30,7 +34,6 @@
 <div class="progress">
 </div>
 
-
 <div class="panel panel-primary">
   <div class="panel-heading panel-primary">
     <td><h4>Car Status</h4></td>
@@ -52,15 +55,19 @@
         <% @car_statuses.each do |car_status| %>
           <% if car_status.status == true %>
           <tr class="success">
-          <%else%>
-          <tr class="danger">
-          <%end %>
             <td><%= i %></td>
             <td><%= car_status.description %></td>
-            <td><%= car_status.status %></td>
+            <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
 
+          <%else%>
+          <tr class="danger">
+            <td><%= i %></td>
+            <td><%= car_status.description %></td>
+            <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
 
-            <td><%= link_to 'Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
+          <%end %>
+          <td><%= link_to 'Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
+
 
           </tr>
 
@@ -76,13 +83,16 @@
 
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Image</h4>
+        <h4 class="modal-title" id="myModalLabel"><%= @car.car_license %> Images</h4>
       </div>
       <div class="modal-body">
+        <div class="row" id ="boss1">
+
+        </div>
         <!--original-->
         <!--original-->
       </div>
@@ -92,25 +102,36 @@
     </div>
   </div>
 </div>
-<button type="button" id="carphoto" class="btn btn-primary" data-toggle="modal" data-target="#myModal">All Image</button>
+<div class="row">
+  <button type="button" id="carphoto" class="btn btn-primary btn-lg col-md-2 col-md-offset-5" data-toggle="modal" data-target="#myModal">All Image</button>
+</div>
 <%= link_to 'Back', cars_path, class: "btn btn-primary" %>
-
+<br><br><br><br>
 
 
   <% @car_statuses.each do |car_status| %>
-    <%if @car_statuses.blank? %>
-      <h3>No Status Here Yet, Please contact us for more information</h3>
-    <%else%>
 
-    <% @car_images.each do |car_image| %>
+    <%if @car_images.blank? %>
       <script type="text/javascript">
-        console.log("car status = ",<%=car_status.id %>, "and car image = ", <%=car_image.car_status_id %> );
-        if (<%=car_status.id %> == <%=car_image.car_status_id %> )  {
-          $( ".modal-body" )
-            .append( "<%= car_image.image_name %> "  )
-            .append( "<img alt='Benz cls class' src='<%= car_image.image.url(:thumb) %>' > "  )
-          }
-</script>
+        var noimage =  "<div class='col-md-6'><h3>No Status Here Yet, Please contact us for more information</h3></div>"
+        $( "#boss1" )
+          .append(noimage)
+
+        }
+      </script>
+
+    <%else%>
+      <% @car_images.each do |car_image| %>
+        <script type="text/javascript">
+          var simage = "<div class='col-md-3'><img alt='Benz cls class' src='<%= car_image.image.url(:thumb) %>' > </div>"
+          var noimage =  "<h3>No Status Here Yet, Please contact us for more information</h3>"
+          // console.log("car status = ",<%=car_status.id %>, "and car image = ", <%=car_image.car_status_id %> );
+          if (<%=car_status.id %> == <%=car_image.car_status_id %> )  {
+            $( "#boss1" )
+              .append(simage)
+
+            }
+            </script>
 
 
       <% end %>

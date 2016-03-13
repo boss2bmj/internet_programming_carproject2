@@ -59,13 +59,19 @@
           <% @car_statuses.each do |car_status| %>
             <% if car_status.status == true %>
             <tr class="success">
-            <%else%>
-            <tr class="danger">
-            <%end %>
-
               <td><%= i %></td>
               <td><%= car_status.description %></td>
-              <td><%= car_status.status %></td>
+              <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
+
+            <%else%>
+            <tr class="danger">
+              <td><%= i %></td>
+              <td><%= car_status.description %></td>
+              <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
+
+            <%end %>
+
+
               <td>Image</td>
               <td><%= link_to 'Add Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
               <td><%= link_to 'Edit Status', edit_car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
@@ -129,10 +135,10 @@
   }else {
     var find_percent = (keep_num_true / keep_num) * 100;
   }
-  var t1 = $("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+"'"+find_percent+"'"+" ;></div>").text(find_percent + "%");
+  var t1 = "<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>";
   // console.log("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"'"+ ">"+find_percent + "%"+"</div>");
   // console.log(t1);
-  $('.progress').append("<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>")
+  $('.progress').append("<div class='progress-bar progress-bar-info progress-bar-striped' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>")
   keep_num = 0;
   keep_num_true = 0;
   keep_num_false = 0;
