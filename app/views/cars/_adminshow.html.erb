@@ -47,6 +47,7 @@
   </div>
   <%else%>
     <% i = 1 %>
+    <% keep_status = []%>
       <table class="table table-bordered text-center">
         <thead>
           <th class="text-center">List</th>
@@ -57,6 +58,7 @@
         </thead>
         <tbody>
           <% @car_statuses.each do |car_status| %>
+          <% keep_status.push(car_status.status)%>
             <% if car_status.status == true %>
             <tr class="success">
               <td><%= i %></td>
@@ -99,41 +101,52 @@
 
 
 
-<% @car_statuses.each do |car_status| %>
-  <%if @car_statuses.blank? %>
-    <h3>No Status Here Yet, Please contact us for more information</h3>
-  <%else%>
-    <script type="text/javascript">
-      keep_num += 1;
-      if ( <%=car_status.status %>) {
-        keep_num_true += 1;
 
-      }else {
-        keep_num_false += 1;
-      }
-
-      // console.log("car status = ",<%=car_status.id %>);
-      // console.log("num",keep_num);
-      // console.log("true",keep_num_true);
-      // console.log("false",keep_num_false);
-
-    </script>
-  <%end %>
-<%end %>
 
 
 
 
 
 <script type="text/javascript">
+// console.log("i = ",typeof(<%=i %>));
+var keep_num_true = 0;
+var keep_num_false = 0;
+var check = 100;
+
+var xxxx= 0;
+// console.log("xxxxxx", typeof(xxxx));
+var status = <%=keep_status%>
+var array = status.split(',');
+var keep_num = array.length
+// console.log(status);
+// console.log(typeof(status));
+// console.log("status length", status.length);
+// console.log(array[0]);
+// console.log(typeof(array[0]));
+// console.log("arra length", array.length);
+for (var num = 0; num < array.length; num++) {
+  // console.log("array[num]",array[num]);
+  if (array[num] == 'true') {
+    // console.log("true--------------");
+    // console.log("aaaa",num);
+    keep_num_true += 1;
+    // console.log("keep_num_true", keep_num_true);
+  }else {
+    keep_num_false += 1;
+  }
+}
 // console.log("num",keep_num);
+// console.log("num",typeof(keep_num));
 // console.log("true",keep_num_true);
+// console.log("true",typeof(keep_num_true));
 // console.log("false",keep_num_false);
+// console.log("false",typeof(keep_num_false));
   if (keep_num_true == 0) {
 
     var find_percent = 0;
   }else {
-    var find_percent = (keep_num_true / keep_num) * 100;
+    // console.log("keep_num_true / keep_num * 100",(keep_num_true / keep_num));
+    var find_percent = (keep_num_true / keep_num) * check;
   }
   var t1 = "<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>";
   // console.log("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"'"+ ">"+find_percent + "%"+"</div>");
