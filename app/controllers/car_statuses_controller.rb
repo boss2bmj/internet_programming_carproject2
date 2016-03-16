@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: car_statuses
+#
+#  id          :integer          not null, primary key
+#  description :text
+#  status      :boolean
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  car_id      :integer
+#
+
 class CarStatusesController < ApplicationController
   before_action :set_car_status, only: [:show, :edit, :update, :destroy]
   before_action :set_car

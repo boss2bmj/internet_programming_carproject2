@@ -5,22 +5,24 @@
 
   <br>
   <div class="container">
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="option1"> เตรียมพร้อม
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="เตรียมพร้อม"> เตรียมพร้อม
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="option2"> รื้อ
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="รื้อ"> รื้อ
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox3" value="option3"> พ่นสี
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckbox3" value="พ่นสี"> พ่นสี
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="option4"> ประกอบ
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckbox1" value="ประกอบ"> ประกอบ
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="option5"> ขัดสี
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="ขัดสี"> ขัดสี
     </label>
     <br><br>
+
+
 
 
     <%= render 'form' %>
@@ -41,38 +43,31 @@
 
 
 <script type="text/javascript">
-var keep_status = [];
-$('.checkbox-inline :checkbox').click(function() {
+var keep_value = "";
+$('.radio-inline :radio').click(function() {
   var $this = $(this);
   // $this will contain a reference to the checkbox
   var xx = this.value
+  // console.log("this.value",xx);
+  // console.log("keep_value1",keep_value);
   var x = "#"+this.value
+  // console.log(xx);
+  // console.log(x);
   if ($this.is(':checked')) {
-      // console.log("11111");
-      // console.log(this.value);
-      keep_status.push(this.value);
-      $('.checkboxselect').append("<p id='"+xx+"'>"+this.value+"</p>")
-      // console.log($this);
-      // $('.checkboxselect').append("<p>"+this.value+"</p>")
-  } else {
-    // console.log("222222");
-    for (var i = 0; i < keep_status.length; i++) {
-      // console.log("kkk",keep_status[i]);
-      if (keep_status[i] == this.value) {
-        // console.log("i =", i);
-        // console.log("keep_status[i]",keep_status[i]);
-        // console.log("this.value = ",this.value);
-        // keep_status.remove(keep_status.i)
-        delete keep_status[i];
-        $(x).remove();
-
-        // $('p').remove("'"+x+"'");
-
-      }
+    // console.log("keep_value2",keep_value);
+    if (keep_value != xx) {
+      $(".description_carstatus").html("");
+    }else {
+      $(".description_carstatus").html("");
     }
+      keep_value = xx
+      $('.description_carstatus').append(xx)
+      // console.log("keep_value3",keep_value);
 
   }
-  console.log(keep_status);
+
+  // console.log(keep_status);
+  // console.log("keep_value4",keep_value);
 });
 
 </script>
