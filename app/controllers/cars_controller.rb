@@ -51,7 +51,7 @@ class CarsController < ApplicationController
     respond_to do |format|
       if @car.save
         checkbox.each do |c|
-          @car_status = CarStatus.create(description: c, car_id: @car.id)
+          @car_status = CarStatus.create(description: c, status: false, car_id: @car.id)
           @car_status.save
 
 
