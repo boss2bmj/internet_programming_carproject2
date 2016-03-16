@@ -44,10 +44,18 @@ class CarsController < ApplicationController
   # POST /cars
   # POST /cars.json
   def create
+    checkbox = params[:inlineCheckboxhidden].split(",")
+
     @car = Car.new(car_params)
 
     respond_to do |format|
       if @car.save
+        checkbox.each do |c|
+          @car_status = CarStatus.create(description: c, car_id: @car.id)
+          @car_status.save
+
+
+        end
         format.html { redirect_to @car, notice: 'Car was successfully created.' }
         format.json { render :show, status: :created, location: @car }
       else

@@ -50,20 +50,20 @@
 <div class="form-group">
   <label class="col-sm-2">Status :</label>
   <div class="col-sm-9">
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="เตรียมพร้อม"> เตรียมพร้อม
+    <label class="checkbox-inline" id="labelid">
+      <input type="checkbox" id="inlineCheckbox" value="เตรียมพร้อม"> เตรียมพร้อม
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="รื้อ"> รื้อ
+    <label class="checkbox-inline" id="labelid">
+      <input type="checkbox" id="inlineCheckbox" value="รื้อ"> รื้อ
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox3" value="พ่นสี"> พ่นสี
+    <label class="checkbox-inline" id="labelid">
+      <input type="checkbox" id="inlineCheckbox" value="พ่นสี"> พ่นสี
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="ประกอบ"> ประกอบ
+    <label class="checkbox-inline" id="labelid">
+      <input type="checkbox" id="inlineCheckbox" value="ประกอบ"> ประกอบ
     </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="ขัดสี"> ขัดสี
+    <label class="checkbox-inline" id="labelid">
+      <input type="checkbox" id="inlineCheckbox" value="ขัดสี"> ขัดสี
     </label>
   </div>
 </div><br>
@@ -71,7 +71,7 @@
 
 </div><br><br>
 
-
+<%= hidden_field_tag "inlineCheckboxhidden" %>
 
 
 <div class="actions btn">
@@ -102,16 +102,24 @@
 
 <script type="text/javascript">
 var keep_status = [];
+var keep_status_hidden = [];
 $('.checkbox-inline :checkbox').click(function() {
+
 var $this = $(this);
 // $this will contain a reference to the checkbox
 var xx = this.value
+console.log(typeof(xx));
+console.log(xx);
+
 var x = "#"+this.value
 if ($this.is(':checked')) {
     // console.log("11111");
     // console.log(this.value);
     keep_status.push(this.value);
     $('.checkboxselect').append("<p id='"+xx+"'> &#0149; " +this.value+"</p>")
+    $('#inlineCheckbox').append(xx)
+    console.log(keep_status);
+
     // console.log($this);
     // $('.checkboxselect').append("<p>"+this.value+"</p>")
 } else {
@@ -126,13 +134,75 @@ if ($this.is(':checked')) {
       delete keep_status[i];
       $(x).remove();
 
+
       // $('p').remove("'"+x+"'");
 
     }
   }
+  // console.log("keep_status_hidden 222 =",keep_status_hidden);
+
 
 }
+$('#inlineCheckboxhidden').val("");
+
+keep_status_hidden =[]
 console.log(keep_status);
+console.log("------------------------------before loop------------------------------");
+for (var i = 0; i < keep_status.length; i++) {
+  console.log("keep_status[i]",keep_status[i]);
+  if (i==0) {
+    if (keep_status[i] != undefined) {
+      keep_status_hidden += keep_status[i]
+    }
+
+  }else {
+    if (keep_status[i] != undefined) {
+      keep_status_hidden += ","+keep_status[i]
+    }
+  }
+}console.log("keep_status_hidden 0 =",keep_status_hidden[0]);
+if (keep_status_hidden[0] == ','){
+  keep_status_hidden = keep_status_hidden.substring(1);
+  console.log("keep_status_hidden --- =",keep_status_hidden);
+}
+
+// keep_status_hidden=[]
+
+
+// keep_status_hidden += keep_status.toString()
+// console.log("keep_status.toString() = ",keep_status.toString());
+
+// console.log($('#inlineCheckbox').value);
+// keep_status_hidden=[]
+// for (var i = 0; i < keep_status.length; i++) {
+//   console.log("keep_status[i] = ",keep_status[i]);
+//   if (keep_status[i] != "undefined") {
+//     keep_status_hidden += keep_status[i]
+//
+//   }
+//
+//
+
+
+
+  // if (i==0) {
+  //   keep_status_hidden += keep_status[i]
+  // }else{
+  //   if (keep_status[i]!= "undefined") {
+  //     console.log("aaa");
+  //     keep_status_hidden += ","+keep_status[i]
+  //   }
+  // }
+
+// }
+console.log("keep_status_hidden 111 =",keep_status_hidden);
+$('#inlineCheckboxhidden').val(keep_status_hidden);
 });
+
+
+
+
+
+
 
 </script>

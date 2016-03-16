@@ -20,6 +20,9 @@
     <label class="radio-inline">
       <input type="radio" name="inlineRadioOptions" id="inlineCheckbox2" value="ขัดสี"> ขัดสี
     </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineCheckboxclear" value="clear"> clear
+    </label>
     <br><br>
 
 
@@ -45,6 +48,7 @@
 <script type="text/javascript">
 var keep_value = "";
 $('.radio-inline :radio').click(function() {
+  $("textarea").html("");
   var $this = $(this);
   // $this will contain a reference to the checkbox
   var xx = this.value
@@ -64,6 +68,8 @@ $('.radio-inline :radio').click(function() {
       $('.description_carstatus').append(xx)
       // console.log("keep_value3",keep_value);
 
+  }else {
+    $(".description_carstatus").html("");
   }
 
   // console.log(keep_status);
