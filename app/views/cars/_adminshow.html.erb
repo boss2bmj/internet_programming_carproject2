@@ -109,45 +109,44 @@
 
 <script type="text/javascript">
 // console.log("i = ",typeof(<%=i %>));
-
 var keep_num_true = 0;
 var keep_num_false = 0;
-var check = 1;
+var check = 100;
 
 var xxxx= 0;
-console.log("xxxxxx", typeof(xxxx));
-var keep_num = status.length
+// console.log("xxxxxx", typeof(xxxx));
 var status = <%=keep_status%>
 var array = status.split(',');
-console.log(status);
-console.log(typeof(status));
-console.log("status length", status.length);
-console.log(array[0]);
-console.log(typeof(array[0]));
-console.log("arra length", array.length);
+var keep_num = array.length
+// console.log(status);
+// console.log(typeof(status));
+// console.log("status length", status.length);
+// console.log(array[0]);
+// console.log(typeof(array[0]));
+// console.log("arra length", array.length);
 for (var num = 0; num < array.length; num++) {
-  console.log("array[num]",array[num]);
+  // console.log("array[num]",array[num]);
   if (array[num] == 'true') {
-    console.log("true--------------");
-    console.log("aaaa",num);
+    // console.log("true--------------");
+    // console.log("aaaa",num);
     keep_num_true += 1;
-    console.log("keep_num_true", keep_num_true);
+    // console.log("keep_num_true", keep_num_true);
   }else {
     keep_num_false += 1;
   }
 }
-console.log("num",keep_num);
-console.log("num",typeof(keep_num));
-console.log("true",keep_num_true);
-console.log("true",typeof(keep_num_true));
-console.log("false",keep_num_false);
-console.log("false",typeof(keep_num_false));
+// console.log("num",keep_num);
+// console.log("num",typeof(keep_num));
+// console.log("true",keep_num_true);
+// console.log("true",typeof(keep_num_true));
+// console.log("false",keep_num_false);
+// console.log("false",typeof(keep_num_false));
   if (keep_num_true == 0) {
 
     var find_percent = 0;
   }else {
-    console.log("keep_num_true / keep_num * 100",(keep_num_true / keep_num) * 100.);
-    var find_percent = (keep_num_true / keep_num) * 100;
+    // console.log("keep_num_true / keep_num * 100",(keep_num_true / keep_num));
+    var find_percent = (keep_num_true / keep_num) * check;
   }
   var t1 = "<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>";
   // console.log("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"'"+ ">"+find_percent + "%"+"</div>");
