@@ -47,6 +47,32 @@
     <%= f.date_select :enter_date %>
   </div>
 </div><br><br>
+<div class="form-group">
+  <label class="col-sm-2">Status :</label>
+  <div class="col-sm-9">
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox1" value="เตรียมพร้อม"> เตรียมพร้อม
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox2" value="รื้อ"> รื้อ
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox3" value="พ่นสี"> พ่นสี
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox1" value="ประกอบ"> ประกอบ
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox2" value="ขัดสี"> ขัดสี
+    </label>
+  </div>
+</div><br>
+<div class="checkboxselect">
+
+</div><br><br>
+
+
+
 
 <div class="actions btn">
   <%= f.submit%>
@@ -57,3 +83,56 @@
 
 
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+var keep_status = [];
+$('.checkbox-inline :checkbox').click(function() {
+var $this = $(this);
+// $this will contain a reference to the checkbox
+var xx = this.value
+var x = "#"+this.value
+if ($this.is(':checked')) {
+    // console.log("11111");
+    // console.log(this.value);
+    keep_status.push(this.value);
+    $('.checkboxselect').append("<p id='"+xx+"'> &#0149; " +this.value+"</p>")
+    // console.log($this);
+    // $('.checkboxselect').append("<p>"+this.value+"</p>")
+} else {
+  // console.log("222222");
+  for (var i = 0; i < keep_status.length; i++) {
+    // console.log("kkk",keep_status[i]);
+    if (keep_status[i] == this.value) {
+      // console.log("i =", i);
+      // console.log("keep_status[i]",keep_status[i]);
+      // console.log("this.value = ",this.value);
+      // keep_status.remove(keep_status.i)
+      delete keep_status[i];
+      $(x).remove();
+
+      // $('p').remove("'"+x+"'");
+
+    }
+  }
+
+}
+console.log(keep_status);
+});
+
+</script>
