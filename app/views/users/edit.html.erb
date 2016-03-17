@@ -1,6 +1,15 @@
-<h1>Editing User</h1>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+
+<div class="panel panel-primary">
+  <div class="panel-heading panel-primary">
+    <h1>Editing User</h1>
+  </div>
+
+  <br>
+  <div class="container">
+    <%= render 'form' %><br><br>
+  </div>
+
+</div>
+<%= link_to 'Back', user_path(@user), class: "btn btn-primary" %>
