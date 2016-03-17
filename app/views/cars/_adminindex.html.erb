@@ -23,7 +23,7 @@
         <td><%= car.enter_date %></td>
         <td><%= car.car_category %></td>
         <td><%= car.car_subcategory %></td>
-        <td><%= link_to 'Add Status', car,class: "btn btn-primary" %></td>
+        <td><%= link_to 'Add Status', new_user_car_car_status(@user,car),class: "btn btn-primary" %></td>
         <td><%= link_to 'Edit', edit_car_path(car),class: "btn btn-primary" %></td>
         <td><%= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %></td>
       </tr>

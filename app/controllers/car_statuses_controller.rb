@@ -13,12 +13,14 @@
 class CarStatusesController < ApplicationController
   before_action :set_car_status, only: [:show, :edit, :update, :destroy]
   before_action :set_car
+  before_action :set_user
 
   # GET /car_statuses
   # GET /car_statuses.json
   def index
     @car_statuses = CarStatus.all
     @car_images = CarImage.all
+    @users = User.all
   end
 
   # GET /car_statuses/1
@@ -42,7 +44,7 @@ class CarStatusesController < ApplicationController
     @car_status = CarStatus.new(car_status_params)
     @car_status.car_id = @car.id
     if @car_status.save
-        redirect_to @car, notice: 'Car was successfully created.'
+        redirect_to user_car_path(@user,@car), notice: 'Car was successfully created.'
       else
         render 'new'
 
@@ -55,11 +57,11 @@ class CarStatusesController < ApplicationController
   def update
     respond_to do |format|
       if @car_status.update(car_status_params)
-        format.html { redirect_to @car, notice: 'Car status was successfully updated.' }
+        format.html { redirect_to user_car_path(@user,@car), notice: 'Car status was successfully updated.' }
         format.json { render :show, status: :ok, location: @car }
       else
         format.html { render :edit }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
+        format.json { render json: user_car_path(@user,@car).errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,7 +71,7 @@ class CarStatusesController < ApplicationController
   def destroy
     @car_status.destroy
     respond_to do |format|
-      format.html { redirect_to car_path(@car), notice: 'Car Status was successfully destroyed.' }
+      format.html { redirect_to user_car_path(@user,@car,@car_status), notice: 'Car Status was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -82,6 +84,11 @@ class CarStatusesController < ApplicationController
 
     def set_car
       @car = Car.find(params[:car_id])
+
+    end
+
+    def set_user
+      @user = User.find(params[:user_id])
 
     end
 

@@ -15,7 +15,7 @@
       <tr>
         <td><%= @car_status.description %></td>
         <td><%= @car_status.status %></td>
-        <td><%= link_to 'Edit Status', edit_car_car_status_path, class: "btn btn-primary" %></td>
+        <td><%= link_to 'Edit Status', edit_user_car_car_status_path, class: "btn btn-primary" %></td>
       </tr>
     </tbody>
   </table>
@@ -32,7 +32,7 @@
   <%if @car_images.blank? %>
     <div class="container">
       <h3>No Image Yet, Would yo like to add it first?</h3>
-      <%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status), class: "btn btn-danger" %><br><br>
+      <%= link_to 'Add Photo', new_user_car_car_status_car_image_path(@user,@car,@car_status), class: "btn btn-danger" %><br><br>
     </div>
 
   <%else%>
@@ -50,8 +50,8 @@
               <td><%= i %></td>
               <td><%= car_image.image_name %></td>
               <td><%= image_tag car_image.image.url(:thumb) %></td>
-              <td><%= link_to 'Edit Image', edit_car_car_status_car_image_path(@car,@car_status, car_image), class: "btn btn-primary" %></td>
-              <td><%= link_to 'Destroy', car_car_status_car_image_path(@car,@car_status, car_image), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+              <td><%= link_to 'Edit Image', edit_user_car_car_status_car_image_path(@user,@car,@car_status, car_image), class: "btn btn-primary" %></td>
+              <td><%= link_to 'Destroy', user_car_car_status_car_image_path(@user,@car,@car_status, car_image), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
 
 
             </tr>
@@ -66,10 +66,10 @@
 
 </div>
 
-<%= link_to 'Add Photo', new_car_car_status_car_image_path(@car,@car_status), class: "btn btn-primary" %>
+<%= link_to 'Add Photo', new_user_car_car_status_car_image_path(@user,@car,@car_status), class: "btn btn-primary" %>
 
 
 
-<%= link_to 'Edit Status', edit_car_car_status_path, class: "btn btn-primary" %>
-<%= link_to 'Back', car_path(@car), class: "btn btn-primary"  %>
+<%= link_to 'Edit Status', edit_user_car_car_status_path, class: "btn btn-primary" %>
+<%= link_to 'Back', user_car_path(@user,@car), class: "btn btn-primary"  %>
 <br><br>

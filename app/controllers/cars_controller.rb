@@ -10,18 +10,19 @@
 #  car_subcategory :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  user            :reference
-#  user_id         :integer
 #
 
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
+
 
   # GET /cars
   # GET /cars.json
   def index
     @cars = Car.all
     @car_statuses = CarStatus.all
+    @users = User.all
   end
 
   # GET /cars/1
@@ -30,6 +31,7 @@ class CarsController < ApplicationController
     @cars = Car.all
     @car_images = CarImage.all
     @car_statuses = CarStatus.where(car_id: @car.id)
+    @users = User.all
   end
 
   # GET /cars/new
@@ -47,20 +49,19 @@ class CarsController < ApplicationController
     checkbox = params[:inlineCheckboxhidden].split(",")
 
     @car = Car.new(car_params)
+    @car.user_id = @user.id
 
     respond_to do |format|
       if @car.save
         checkbox.each do |c|
           @car_status = CarStatus.create(description: c, status: false, car_id: @car.id)
           @car_status.save
-
-
         end
-        format.html { redirect_to @car, notice: 'Car was successfully created.' }
-        format.json { render :show, status: :created, location: @car }
+        format.html { redirect_to @user, notice: 'Car was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,11 +71,11 @@ class CarsController < ApplicationController
   def update
     respond_to do |format|
       if @car.update(car_params)
-        format.html { redirect_to @car, notice: 'Car was successfully updated.' }
-        format.json { render :show, status: :ok, location: @car }
+        format.html { redirect_to @user, notice: 'Car was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -84,7 +85,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to cars_url, notice: 'Car was successfully destroyed.' }
+      format.html { redirect_to users_path(@user), notice: 'Car was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -93,6 +94,10 @@ class CarsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_car
       @car = Car.find(params[:id])
+    end
+    def set_user
+      @user = User.find(params[:user_id])
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

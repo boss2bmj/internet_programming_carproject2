@@ -1,0 +1,7 @@
+
+
+<% if admin_signed_in? %>
+  <%= render 'adminindex'%>
+<% else %>
+  <%= render 'userindex'%>
+<% end %>

@@ -44,9 +44,12 @@ end
 ```
 
 ##Add Car MVC
-```
+
+```bash
+$ rails g scaffold User first_name:string last_name:string gender:text birth_date:date email:string mobile_number:integer password:text 
 $ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string 
 $ rails g scaffold CarStatus description:text status:boolean
+$ rails g scaffold CarImage image_name:string
 $ rake db:migrate
 ```
 >make sure that you not forget to run rake db:migrate
@@ -82,11 +85,7 @@ To begin with ```user.rb```
 
 ```rb
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  has_many :cars
+  has_many :cars, dependent: :destroy
 end
 ```
 >I set that user has many cars
@@ -113,6 +112,22 @@ class CarStatus < ActiveRecord::Base
 end
 ```
 >car status belong to car
+
+
+
+
+##Connect Table between User and Cars
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##Connect Table between Car and CarStatus

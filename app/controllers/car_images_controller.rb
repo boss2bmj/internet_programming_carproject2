@@ -17,6 +17,8 @@ class CarImagesController < ApplicationController
   before_action :set_car_image, only: [:show, :edit, :update, :destroy]
   before_action :set_car_status
   before_action :set_car
+  before_action :set_user
+
   # GET /car_images
   # GET /car_images.json
   def index
@@ -48,7 +50,7 @@ class CarImagesController < ApplicationController
     @car_image = CarImage.new(car_image_params)
     @car_image.car_status_id = @car_status.id
     if @car_image.save
-        redirect_to car_car_status_path(@car,@car_status), notice: 'Car was successfully created.'
+        redirect_to user_car_car_status_path(@user,@car,@car_status), notice: 'Car was successfully created.'
 
       else
         render 'new'
@@ -61,7 +63,7 @@ class CarImagesController < ApplicationController
   def update
     respond_to do |format|
       if @car_image.update(car_image_params)
-        format.html { redirect_to car_car_status_path(@car,@car_status), notice: 'Car image was successfully updated.' }
+        format.html { redirect_to user_car_car_status_path(@user,@car,@car_status), notice: 'Car image was successfully updated.' }
         format.json { render :show, status: :ok, location: @car_image }
       else
         format.html { render :edit }
@@ -75,7 +77,7 @@ class CarImagesController < ApplicationController
   def destroy
     @car_image.destroy
     respond_to do |format|
-      format.html { redirect_to car_car_status_path(@car,@car_status), notice: 'Car image was successfully destroyed.' }
+      format.html { redirect_to car_car_status_path(@user,@car,@car_status), notice: 'Car image was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -91,6 +93,10 @@ class CarImagesController < ApplicationController
     end
     def set_car
       @car = Car.find(params[:car_id])
+
+    end
+    def set_user
+      @user = User.find(params[:user_id])
 
     end
 
