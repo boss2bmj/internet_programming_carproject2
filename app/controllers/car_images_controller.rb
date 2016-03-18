@@ -77,7 +77,7 @@ class CarImagesController < ApplicationController
   def destroy
     @car_image.destroy
     respond_to do |format|
-      format.html { redirect_to car_car_status_path(@user,@car,@car_status), notice: 'Car image was successfully destroyed.' }
+      format.html { redirect_to user_car_car_status_path(@user,@car,@car_status), notice: 'Car image was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
