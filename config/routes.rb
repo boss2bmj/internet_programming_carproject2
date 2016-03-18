@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
 
 
-
   devise_for :admins
-  resources :users do
-    resources :cars do
-      resources :car_statuses, except:[ :index] do
-        resources :car_images, except:[:show,:index]
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+
+
+    resources :users do
+      resources :cars do
+        resources :car_statuses, except:[ :index] do
+          resources :car_images, except:[:show,:index]
+        end
       end
     end
-  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
