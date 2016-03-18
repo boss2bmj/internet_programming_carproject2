@@ -1,3 +1,5 @@
+ruby "2.2.1"
+#ruby-gemset=Internet-programming-carservice
 source 'https://rubygems.org'
 
 
@@ -26,6 +28,9 @@ gem 'devise'
 gem "paperclip", "~> 4.3"
 gem 'rails_admin'
 gem 'pg'
+gem 'capistrano', '~> 3.4.0'
+gem 'capistrano-rails'
+gem 'capistrano-rvm'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
