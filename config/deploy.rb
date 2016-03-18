@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 set :application, 'Internet-programming-carservice'
-set :repo_url, 'git@bitbucket.org:boss2bmj/Internet-programming-carservice.git'
+set :repo_url, 'git@github.com:boss2bmj/internet_programming_carproject2.git'
 set :rvm_ruby_version, '2.1.5@Internet-programming-carservice'
 set :deploy_to, '/home/boss2bmj/Internet-programming-carservice'
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
