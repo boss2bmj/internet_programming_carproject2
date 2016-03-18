@@ -26,13 +26,18 @@
     <div class="form-group">
       <label class="col-sm-2"><%= f.label :gender%> :</label>
       <div class="col-sm-9">
-        <%= f.text_field :gender,class:"form-control"%>
+
+      <select class="form-control" type="text" name="user[gender]" id="user_gender">
+        <option>male</option>
+        <option>female</option>
+
+      </select>
       </div>
     </div><br><br><br>
     <div class="form-group">
       <label class="col-sm-2"><%= f.label :birth_date%> :</label>
       <div class="col-sm-9">
-        <%= f.date_select :birth_date,class:"form-control"%>
+        <%= f.date_select :birth_date,class:"form-control",:start_year => Time.now.year - 100, :end_year => Time.now.year%>
       </div>
     </div><br><br><br>
     <div class="form-group">

@@ -52,7 +52,7 @@
   <label class="col-sm-2">Status :</label>
   <div class="col-sm-9" id="checkboxdiv">
     <label class="checkbox-inline" id="labelid">
-      <input class = "inputcheckbox"type="checkbox" id="inlineCheckbox" value="เตรียมพร้อม" > เตรียมพร้อม
+      <input class = "inputcheckbox"type="checkbox" id="inlineCheckbox" value="เตรียมพร้อม" data-toggle="tooltip" data-placement="top" title="Tooltip on top"> เตรียมพร้อม
     </label>
     <label class="checkbox-inline" id="labelid">
       <input class = "inputcheckbox"type="checkbox" id="inlineCheckbox" value="รื้อ"> รื้อ
@@ -107,6 +107,7 @@
 
 
 <script type="text/javascript">
+
 var keep_status = [];
 var keep_status_hidden = [];
 $('.checkbox-inline :checkbox').click(function() {

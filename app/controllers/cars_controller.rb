@@ -57,11 +57,11 @@ class CarsController < ApplicationController
           @car_status = CarStatus.create(description: c, status: false, car_id: @car.id)
           @car_status.save
         end
-        format.html { redirect_to @user, notice: 'Car was successfully created.' }
+        format.html { redirect_to user_car_path(@user,@car), notice: 'Car was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: user_car_path(@user,@car).errors, status: :unprocessable_entity }
       end
     end
   end
@@ -85,7 +85,7 @@ class CarsController < ApplicationController
   def destroy
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to users_path(@user), notice: 'Car was successfully destroyed.' }
+      format.html { redirect_to user_path(@user), notice: 'Car was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
