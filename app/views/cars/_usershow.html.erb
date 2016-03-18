@@ -1,10 +1,6 @@
-<h1>Information of <%= @car.car_license %></h1><br>
-
-
-
 <div class="panel panel-primary">
   <div class="panel-heading panel-primary">
-    <td><h4>Car Details</h4></td>
+    <td><h4>Car Informations</h4></td>
   </div>
   <table class="table table-bordered text-center">
     <thead>
@@ -34,166 +30,130 @@
 <div class="progress">
 </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading panel-primary">
-    <td><h4>Car Status</h4></td>
-  </div>
-<%if @car_statuses.blank? %>
-<div class="container">
-  <h3>No Car Status Yet, Please contact us for more information.</h3>
-</div>
-<%else%>
-  <% i = 1 %>
-    <table class="table table-bordered text-center">
-      <thead>
-        <th class="text-center">List</th>
-        <th class="text-center">Order</th>
-        <th class="text-center">Status</th>
-        <th class="text-center">Image</th>
-      </thead>
-      <tbody>
-        <% @car_statuses.each do |car_status| %>
-          <% if car_status.status == true %>
-          <tr class="success">
-            <td><%= i %></td>
-            <td><%= car_status.description %></td>
-            <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
-
-          <%else%>
-          <tr class="danger">
-            <td><%= i %></td>
-            <td><%= car_status.description %></td>
-            <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
-
-          <%end %>
-          <td><%= link_to 'Image', car_car_status_path(@car, car_status), class: "btn btn-primary" %></td>
 
 
-          </tr>
-
-          <% i = i+1 %>
-      </tbody>
 
 
-<%end %>
-<%end %>
-  </table>
-
-</div>
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= @car.car_license %> Images</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row" id ="boss1">
-
-        </div>
-        <!--original-->
-        <!--original-->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading panel-primary">
+      <td><h4>Car Status</h4></td>
     </div>
+  <%if @car_statuses.blank? %>
+  <div class="container">
+    <h3>No Car Status Yet, Would yo like to add it first?</h3>
   </div>
-</div>
-<div class="row">
-  <button type="button" id="carphoto" class="btn btn-primary btn-lg col-md-2 col-md-offset-5" data-toggle="modal" data-target="#myModal">All Image</button>
-</div>
-<%= link_to 'Back', cars_path, class: "btn btn-primary" %>
-<br><br><br><br>
+  <%else%>
+    <% i = 1 %>
+    <% keep_status = []%>
+      <table class="table table-bordered text-center">
+        <thead>
+          <th class="text-center">List</th>
+          <th class="text-center">Order</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Image</th>
+          <th ></th>
+        </thead>
+        <tbody>
+          <% @car_statuses.each do |car_status| %>
+          <% keep_status.push(car_status.status)%>
+            <% if car_status.status == true %>
+            <tr class="success">
+              <td><%= i %></td>
+              <td><%= car_status.description %></td>
+              <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
+
+            <%else%>
+            <tr class="danger">
+              <td><%= i %></td>
+              <td><%= car_status.description %></td>
+              <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
+
+            <%end %>
 
 
-  <% @car_statuses.each do |car_status| %>
-
-    <%if @car_images.blank? %>
-      <script type="text/javascript">
-        var noimage =  "<div class='col-md-6'><h3>No Status Here Yet, Please contact us for more information</h3></div>"
-        $( "#boss1" )
-          .append(noimage)
-
-        }
-      </script>
-
-    <%else%>
-      <% @car_images.each do |car_image| %>
-        <script type="text/javascript">
-          var simage = "<div class='col-md-3'><img alt='Benz cls class' src='<%= car_image.image.url(:thumb) %>' > </div>"
-          var noimage =  "<h3>No Status Here Yet, Please contact us for more information</h3>"
-          // console.log("car status = ",<%=car_status.id %>, "and car image = ", <%=car_image.car_status_id %> );
-          if (<%=car_status.id %> == <%=car_image.car_status_id %> )  {
-            $( "#boss1" )
-              .append(simage)
-
-            }
-            </script>
-
-
-      <% end %>
-    <% end %>
-  <% end %>
+              <td>Image</td>
+              <td><%= link_to 'Image', user_car_car_status_path(@user,@car,car_status), class: "btn btn-primary" %></td>
 
 
 
+            </tr>
+
+            <% i = i+1 %>
+        </tbody>
 
 
-
-
-
-
-
-
-
-
-
-
-  <% @car_statuses.each do |car_status| %>
-    <%if @car_statuses.blank? %>
-      <h3>No Status Here Yet, Please contact us for more information</h3>
-    <%else%>
-      <script type="text/javascript">
-        keep_num += 1;
-        if ( <%=car_status.status %>) {
-          keep_num_true += 1;
-
-        }else {
-          keep_num_false += 1;
-        }
-
-        // console.log("car status = ",<%=car_status.id %>);
-        // console.log("num",keep_num);
-        // console.log("true",keep_num_true);
-        // console.log("false",keep_num_false);
-
-      </script>
-    <%end %>
   <%end %>
+  <%end %>
+    </table>
+
+
+</div>
+
+<br><br>
+
+<%= link_to 'Back', user_path(@user), class: "btn btn-primary" %>
 
 
 
 
 
-  <script type="text/javascript">
-  // console.log("num",keep_num);
-  // console.log("true",keep_num_true);
-  // console.log("false",keep_num_false);
-    if (keep_num_true == 0) {
 
-      var find_percent = 0;
-    }else {
-      var find_percent = (keep_num_true / keep_num) * 100;
-    }
-    var t1 = $("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+"'"+find_percent+"'"+" ;></div>").text(find_percent + "%");
-    // console.log("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"'"+ ">"+find_percent + "%"+"</div>");
-    // console.log(t1);
-    $('.progress').append("<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>")
-    keep_num = 0;
-    keep_num_true = 0;
-    keep_num_false = 0;
-    find_percent = 0;
-  </script>
+
+
+
+
+
+
+
+<script type="text/javascript">
+// console.log("i = ",typeof(<%=i %>));
+var keep_num_true = 0;
+var keep_num_false = 0;
+var check = 100;
+
+var xxxx= 0;
+// console.log("xxxxxx", typeof(xxxx));
+var status = <%=keep_status%>
+var array = status.split(',');
+var keep_num = array.length
+// console.log(status);
+// console.log(typeof(status));
+// console.log("status length", status.length);
+// console.log(array[0]);
+// console.log(typeof(array[0]));
+// console.log("arra length", array.length);
+for (var num = 0; num < array.length; num++) {
+  // console.log("array[num]",array[num]);
+  if (array[num] == 'true') {
+    // console.log("true--------------");
+    // console.log("aaaa",num);
+    keep_num_true += 1;
+    // console.log("keep_num_true", keep_num_true);
+  }else {
+    keep_num_false += 1;
+  }
+}
+// console.log("num",keep_num);
+// console.log("num",typeof(keep_num));
+// console.log("true",keep_num_true);
+// console.log("true",typeof(keep_num_true));
+// console.log("false",keep_num_false);
+// console.log("false",typeof(keep_num_false));
+  if (keep_num_true == 0) {
+
+    var find_percent = 0;
+  }else {
+    // console.log("keep_num_true / keep_num * 100",(keep_num_true / keep_num));
+    var find_percent = (keep_num_true / keep_num) * check;
+  }
+  var t1 = "<div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>";
+  // console.log("<div class='progress-bar' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"'"+ ">"+find_percent + "%"+"</div>");
+  // console.log(t1);
+  $('.progress').append("<div class='progress-bar progress-bar-info progress-bar-striped' role='progressbar' aria-valuenow="+"'"+find_percent+"'"+" aria-valuemin='0' aria-valuemax='100' style='width:"+find_percent+"%'"+ ">"+"<span class='sr-only'>"+find_percent + "%"+ "Complete</span>"+find_percent + "%"+"</div>")
+  keep_num = 0;
+  keep_num_true = 0;
+  keep_num_false = 0;
+  find_percent = 0;
+</script>

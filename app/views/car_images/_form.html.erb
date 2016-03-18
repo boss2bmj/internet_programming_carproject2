@@ -23,8 +23,8 @@
 
   <div class="form-group">
     <label class="col-sm-3"><%= f.file_field :image, onchange: "loadFile(event)" , accept:"image/*"  %></label>
-    <div class="col-sm-9">
-      <img id="output"/>
+    <div class="col-sm-8 col-sm-push-1">
+      <img id="output" style="width: 350px"/>
     </div>
   </div><br><br>
 
@@ -43,6 +43,8 @@
 <script>
   var loadFile = function(event) {
   var output = document.getElementById('output');
+  console.log(output);
   output.src = URL.createObjectURL(event.target.files[0]);
+  console.log(output.src);
   };
 </script>

@@ -12,9 +12,21 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td><%= @car_status.description %></td>
-        <td><%= @car_status.status %></td>
+        <% if @car_status.status == true %>
+          <tr class="success">
+            <td><%= @car_status.description %></td>
+            <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
+
+        <%else%>
+          <tr class="danger">
+            <td><%= @car_status.description %></td>
+            <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
+
+        <%end%>
+
+
+
+
         <td><%= link_to 'Edit Status', edit_user_car_car_status_path, class: "btn btn-primary" %></td>
       </tr>
     </tbody>

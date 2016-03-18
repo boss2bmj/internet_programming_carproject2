@@ -11,9 +11,21 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td><%= @car_status.description %></td>
-        <td><%= @car_status.status %></td>
+        <% if @car_status.status == true %>
+          <tr class="success">
+            <td><%= @car_status.description %></td>
+            <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
+
+        <%else%>
+          <tr class="danger">
+            <td><%= @car_status.description %></td>
+            <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
+
+        <%end%>
+
+
+
+
       </tr>
     </tbody>
   </table>
@@ -29,7 +41,7 @@
     </div>
   <%if @car_images.blank? %>
     <div class="container">
-      <h3>No Image Here Yet, Please Contact us for mor information</h3>
+      <h3>No Image Yet, Would yo like to add it first?</h3>
     </div>
 
   <%else%>
@@ -62,4 +74,6 @@
 
 
 
-<%= link_to 'Back', car_path(@car), class: "btn btn-primary"  %>
+
+<%= link_to 'Back', user_car_path(@user,@car), class: "btn btn-primary"  %>
+<br><br>
