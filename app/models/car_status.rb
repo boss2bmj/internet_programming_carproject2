@@ -11,6 +11,7 @@
 #
 
 class CarStatus < ActiveRecord::Base
+  validates :description, presence: true
   belongs_to :car
   has_many :car_images, dependent: :destroy
 end
