@@ -58,17 +58,18 @@
         <tbody>
           <% @car_statuses.each do |car_status| %>
           <% keep_status.push(car_status.status)%>
-            <% if car_status.status == true %>
+            <% if car_status.status == false %>
+            <tr class="danger">
+              <td><%= i %></td>
+              <td><%= car_status.description %></td>
+              <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
+
+            <%else%>
             <tr class="success">
               <td><%= i %></td>
               <td><%= car_status.description %></td>
               <td><button type="button" class="btn btn-success btn-sm active" disabled="disabled"><i class="fa fa-check"></i></button></td>
 
-            <%else%>
-            <tr class="danger">
-              <td><%= i %></td>
-              <td><%= car_status.description %></td>
-              <td><button type="button" class="btn btn-danger btn-sm active" disabled="disabled"><i class="fa fa-times"></i></button></td>
 
             <%end %>
 
