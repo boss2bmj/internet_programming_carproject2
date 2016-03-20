@@ -17,4 +17,8 @@
 class User < ActiveRecord::Base
   validates :first_name, :last_name,:birth_date,:mobile_number, presence: true
   has_many :cars, dependent: :destroy
+
+
+
+  has_secure_password
 end
