@@ -59,7 +59,7 @@
         <tbody>
           <% @car_statuses.each do |car_status| %>
           <% keep_status.push(car_status.status)%>
-            <% if car_status.status == true %>
+            <% if car_status.status == false %>
             <tr class="danger">
               <td><%= i %></td>
               <td><%= car_status.description %></td>
