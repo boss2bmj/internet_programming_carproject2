@@ -46,8 +46,8 @@ end
 ##Add Car MVC
 
 ```bash
-$ rails g scaffold User first_name:string last_name:string gender:text birth_date:date email:string mobile_number:integer password:text 
-$ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string 
+$ rails g scaffold User first_name:string last_name:string gender:text birth_date:date email:string mobile_number:integer password:text
+$ rails g scaffold Car car_license:string description:text enter_date:date car_category:string car_subcategory:string
 $ rails g scaffold CarStatus description:text status:boolean
 $ rails g scaffold CarImage image_name:string
 $ rake db:migrate
@@ -188,8 +188,8 @@ def set_car
 
 
 
-To make the status show, i need to add ```@car_statuses = CarStatus.all```  ```@car_statuses = CarStatus.where(car_id: @car.id)``` 
-in index, and also in show. 
+To make the status show, i need to add ```@car_statuses = CarStatus.all```  ```@car_statuses = CarStatus.where(car_id: @car.id)```
+in index, and also in show.
 
 ```rb
 def index
@@ -329,8 +329,8 @@ def set_car
 
 
 
-To make the status show, i need to add ```@car_images = CarImage.all```  ```@car_images = CarImage.where(car_status_id: @car_status.id)``` 
-in index, and also in show by order. 
+To make the status show, i need to add ```@car_images = CarImage.all```  ```@car_images = CarImage.where(car_status_id: @car_status.id)```
+in index, and also in show by order.
 
 ```rb
 def index
@@ -347,5 +347,3 @@ def index
 **Do not forget to change the path, if not it will error!!**
 
 you can check route by type ```$ rake routes``` in your terminal.
-
-
