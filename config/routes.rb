@@ -8,8 +8,8 @@ Rails.application.routes.draw do
 
     resources :users do
       resources :cars do
-        resources :car_statuses, except:[ :index] do
-          resources :car_images, except:[:show,:index]
+        resources :car_statuses do
+          resources :car_images
         end
       end
     end
