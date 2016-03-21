@@ -17,9 +17,9 @@ class Car < ActiveRecord::Base
   validates :car_license, presence: true
   belongs_to :user
   has_many :car_statuses, dependent: :destroy
-  def status_percent_calculate(status=true)
-    all = self.car_statuses.count
-    done = self.car_statuses.where(status: status).count
-    (done/all).to_f
-  end
+  # def status_percent_calculate(status=true)
+  #   all = self.car_statuses.count
+  #   done = self.car_statuses.where(status: status).count
+  #   (done/all).to_f
+  # end
 end

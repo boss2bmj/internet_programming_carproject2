@@ -33,14 +33,14 @@ RSpec.describe Car, type: :model do
     expect(@car1.save).to be(false)
   end
 
-
-  # it "test car id" do
-  #   @car1.user_id = "asda"
-  #   expect(@car1.save).to be(false)
-  # end
-
   it "if has car license should be fine" do
     @car1.car_license = "aa-0000"
+    @car1.description = ""
+    @car1.enter_date =""
+    @car1.car_category =""
+    @car1.car_subcategory =""
+    @car1.user_id = ""
+
     expect(@car1.save).to be(true)
   end
 

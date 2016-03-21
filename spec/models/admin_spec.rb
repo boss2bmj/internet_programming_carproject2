@@ -64,7 +64,24 @@ RSpec.describe Admin, type: :model do
 
   it "password and password_confirmation should be the same" do
     @admin1.password = "1"*8
-    @admin1.password_confirmation = "2"*8
+    @admin1.password_confirmation = "aaaaa"
+    expect(@admin1.save).to be(false)
+  end
+
+  it "password_confirmation should be string" do
+    @admin1.password = "1"
+    @admin1.password_confirmation = 1
+    expect(@admin1.save).to be(false)
+  end
+
+  it "password should be string" do
+    @admin1.password = 1
+    @admin1.password_confirmation = "1"
+    expect(@admin1.save).to be(false)
+  end
+  it "password and password_confirmation should have the same length and should be the same" do
+    @admin1.password = "1"*8
+    @admin1.password_confirmation = "2"*10
     expect(@admin1.save).to be(false)
   end
 
